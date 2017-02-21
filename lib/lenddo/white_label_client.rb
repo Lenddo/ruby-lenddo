@@ -1,10 +1,10 @@
 require "lenddo/authentication"
-require "lenddo/service_client/score_service"
+require "lenddo/white_label_client/network_service"
 
 include Lenddo::Authentication
 
 module Lenddo
-  module ServiceClient
+  module WhiteLabelClient
     class << self
       attr_accessor :network_service
 
@@ -21,7 +21,7 @@ module Lenddo
       def partner_token(application_id, provider, oauth_key, oauth_secret = nil, token_data)
         @network_service ||= NetworkService.new
 
-        if !valid_token_provider.include?(provider)
+        if !valid_token_providers.include?(provider)
           raise InvalidArgumentError.new("@provider must be one of the following: #{valid_token_providers.join(", ")}")
         else
           @network_service.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)
