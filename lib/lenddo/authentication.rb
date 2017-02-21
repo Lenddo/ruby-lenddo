@@ -1,5 +1,6 @@
 require 'base64'
 require 'curb'
+require 'json'
 require 'openssl'
 
 module Lenddo
@@ -20,6 +21,7 @@ module Lenddo
           http.headers[key] = value.chomp
         end
 
+        http.verbose = true
         http.use_ssl = 3
         http.ssl_verify_host = OpenSSL::SSL::VERIFY_PEER
         http.cacert = File.absolute_path("./cacert.pem") if RbConfig::CONFIG['host_os'] == 'mingw32'
@@ -29,7 +31,7 @@ module Lenddo
     private
     def sign(verb, path, body, ts = nil)
       date_format = "%a %b %d %H:%M:%S %Z %Y"
-      digest = body.empty? ? "" : Digest::MD5.hexdigest(body)
+      digest = body.empty? ? "" : Digest::MD5.hexdigest(body.to_json)
       timestamp = ts.nil? ? Time.now : Time.parse(ts, date_format)
       date = timestamp.strftime(date_format)
       text = [verb, digest, date, path].join("\n")
