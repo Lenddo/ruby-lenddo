@@ -24,6 +24,24 @@ module Lenddo
             { partner_script_id: partnerscript_id }
         )
       end
+
+      def application_decision(application_id, partnersciprt_id)
+        signed_request(
+            "GET",
+            host,
+            "/ApplicationDecision/#{application_id}",
+            { partner_script_id: partnersciprt_id}
+        )
+      end
+
+      def extra_application_data(application_id, partnerscript_id, extra_data)
+        signed_request(
+            "POST",
+            "https://networkservice.lenddo.com",
+            "/ExtraApplicationData",
+            { application_id: application_id, partner_script_id: partnerscript_id, extra_data: extra_data }
+        )
+      end
     end
   end
 end
