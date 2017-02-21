@@ -22,7 +22,16 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Require the Gem:
+
+    require 'lenddo'
+    
+Before make an API calls you need to configure :access_key and :secret_key in Lenddo. To do this run the following code:
+
+    Lenddo.configure do |config|
+        config.access_key = @access_key
+        config.secret_key = @secret_key
+    end
 
 ## Development
 
