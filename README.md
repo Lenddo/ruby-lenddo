@@ -61,6 +61,12 @@ To retrieve the decision you'll need the application ID and the partner script I
 
 If you're sending extra information with your application you can use this method to submit it. Extra Application Data may be used to enhance the model performance based on data you may already have about a user.
 
+#### Notes
+
+1. You cannot make this request more than once per application/partner script combination. Doing so will result in a BAD_REQUEST response from the service.
+2. If you do not know what this functionality is but would like to submit data for Lenddo to work with please contact your Lenddo representative.
+3. Format of the data being sent in the `@extra_data` field should be pre-negotiated with Lenddo and shouldn't deviate from agreement to maximize the use of this call.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
