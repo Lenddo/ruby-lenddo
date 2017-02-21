@@ -20,18 +20,20 @@ Or install it yourself as:
 
     $ gem install lenddo
 
-## Usage
+## Configuration
 
 Require the Gem:
 
     require 'lenddo'
     
-Before make an API calls you need to configure :access_key and :secret_key in Lenddo. To do this run the following code:
+Before make an API calls you need to configure @access_key and @secret_key in Lenddo. To do this run the following code:
 
     Lenddo.configure do |config|
         config.access_key = @access_key
         config.secret_key = @secret_key
     end
+
+Note: To get your @access_key and @secret_key contact Lenddo or go to https://partners.lenddo.com/api_key.
 
 ## Development
 
