@@ -37,7 +37,7 @@ Note: To get your `@access_key` and `@secret_key` go to https://partners.lenddo.
 
 ## Service Client
 
-The `ServiceClient` allows client to send extra information or retrieve the scoring, verification, and decision results from Lenddo.
+The `ServiceClient` allows client to send extra information or retrieve the scoring, verification, and decision results from Lenddo. To use run `require 'lenddo/service_client'`
 
 ### Get a Score
 
