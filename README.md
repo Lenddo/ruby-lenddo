@@ -35,6 +35,32 @@ Before make an API calls you need to configure `@access_key` and `@secret_key` i
 
 Note: To get your `@access_key` and `@secret_key` go to https://partners.lenddo.com/api_key.
 
+## Service Client
+
+The `ServiceClient` allows client to send extra information or retrieve the scoring, verification, and decision results from Lenddo.
+
+### Get a Score
+
+To retrieve the score you'll need the application ID and the partner script ID that you used to create the application.
+
+    Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
+
+### Get a Verification
+
+To retrieve the verification you'll need the application ID and the partner script ID that you used to create the application.
+
+    Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
+    
+### Get an Application Decision
+
+To retrieve the decision you'll need the application ID and the partner script ID that you used to create the application.
+
+    Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
+
+### Send Extra Application Data
+
+If you're sending extra information with your application you can use this method to submit it. Extra Application Data may be used to enhance the model performance based on data you may already have about a user.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
