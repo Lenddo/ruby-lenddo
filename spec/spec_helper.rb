@@ -1,6 +1,7 @@
 require "bundler/setup"
+require "dotenv"
 require "lenddo"
-require 'rspec'
+require "rspec"
 
 Dotenv.load
 
