@@ -22,7 +22,7 @@ module Lenddo
         @network_service ||= NetworkService.new
 
         if !valid_token_providers.include?(provider)
-          raise InvalidArgumentError.new("@provider must be one of the following: #{valid_token_providers.join(", ")}")
+          raise ArgumentError.new("@provider must be one of the following: #{valid_token_providers.join(", ")}")
         else
           @network_service.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)
         end
@@ -38,9 +38,9 @@ module Lenddo
         @network_service ||= NetworkService.new
 
         if profile_ids.empty?
-          raise InvalidArgumentError.new("@profile_ids must contain at least one entry.")
+          raise ArgumentError.new("@profile_ids must contain at least one entry.")
         elsif profile_ids.class != Array
-          raise InvalidArgumentError.new("@profile_ids must be an array.")
+          raise ArgumentError.new("@profile_ids must be an array.")
         else
           @network_service.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
         end

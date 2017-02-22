@@ -39,7 +39,7 @@ module Lenddo
         @score_service ||= ScoreService.new
 
         if extra_data.class != Hash
-          raise InvalidArgumentError.new("@extra_data must be a Hash.")
+          raise ArgumentError.new("@extra_data must be a Hash.")
         else
           @score_service.extra_application_data(application_id, partnerscript_id, extra_data)
         end
