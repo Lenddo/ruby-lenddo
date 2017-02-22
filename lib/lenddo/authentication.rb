@@ -21,7 +21,6 @@ module Lenddo
           http.headers[key] = value.chomp
         end
 
-        http.verbose = true
         http.use_ssl = 3
         http.ssl_verify_host = OpenSSL::SSL::VERIFY_PEER
         http.cacert = File.absolute_path("./cacert.pem") if RbConfig::CONFIG['host_os'] == 'mingw32'
