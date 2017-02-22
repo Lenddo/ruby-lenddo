@@ -1,16 +1,10 @@
 module Lenddo
   module ServiceClient
     class ScoreService
-      attr_accessor :host
-
-      def initialize
-        @host = "https://scoreservice.lenddo.com"
-      end
-
       def application_score(application_id, partnerscript_id)
         response = signed_request(
           "GET",
-          host,
+          Lenddo.configuration.score_service,
           "/ClientScore/#{application_id}",
           { "partner_script_id" => partnerscript_id }
         )
@@ -20,7 +14,7 @@ module Lenddo
       def application_verification(application_id, partnerscript_id)
         response = signed_request(
           "GET",
-          host,
+          Lenddo.configuration.score_service,
           "/ClientVerification/#{application_id}",
           { "partner_script_id" => partnerscript_id }
         )
@@ -30,7 +24,7 @@ module Lenddo
       def application_decision(application_id, partnerscript_id)
         response = signed_request(
           "GET",
-          host,
+          Lenddo.configuration.score_service,
           "/ApplicationDecision/#{application_id}",
           { "partner_script_id" => partnerscript_id}
         )
@@ -40,7 +34,7 @@ module Lenddo
       def extra_application_data(application_id, partnerscript_id, extra_data)
         response = signed_request(
           "POST",
-          "https://networkservice.lenddo.com",
+          Lenddo.configuration.network_service,
           "/ExtraApplicationData",
           { "application_id" => application_id, "partner_script_id" => partnerscript_id, "extra_data" => extra_data }
         )

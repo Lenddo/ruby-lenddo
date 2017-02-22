@@ -15,9 +15,5 @@ RSpec.describe Lenddo::Configuration do
       expect(score_service).to eq('https://scoreservice.lenddo.com')
       expect(network_service).to eq('https://networkservice.lenddo.com')
     end
-
-    it "should be configurable" do
-      
-    end
   end
 end
