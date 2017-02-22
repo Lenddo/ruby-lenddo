@@ -27,12 +27,12 @@ module Lenddo
         JSON.parse(response.body)
       end
 
-      def application_decision(application_id, partnersciprt_id)
+      def application_decision(application_id, partnerscript_id)
         response = signed_request(
           "GET",
           host,
           "/ApplicationDecision/#{application_id}",
-          { "partner_script_id" => partnersciprt_id}
+          { "partner_script_id" => partnerscript_id}
         )
         JSON.parse(response.body)
       end
