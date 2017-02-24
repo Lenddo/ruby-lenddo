@@ -30,16 +30,6 @@ module Lenddo
         )
         JSON.parse(response.body)
       end
-
-      def extra_application_data(application_id, partnerscript_id, extra_data)
-        response = signed_request(
-          "POST",
-          Lenddo.configuration.network_service,
-          "/ExtraApplicationData",
-          { "application_id" => application_id, "partner_script_id" => partnerscript_id, "extra_data" => extra_data }
-        )
-        JSON.parse(response.body)
-      end
     end
   end
 end

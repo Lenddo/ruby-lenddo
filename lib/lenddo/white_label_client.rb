@@ -7,27 +7,34 @@ module Lenddo
   module WhiteLabelClient
     class << self
       attr_accessor :network_service
+      # Submit additional data about an application to Lenddo.
+      # @param string application_id
+      # @param string partner_script_id
+      # @param array extra_data
+      def extra_application_data(application_id, partnerscript_id, extra_data = {})
+        @score_service ||= ScoreService.new
 
-      def valid_token_providers
-        ['Facebook', 'LinkedIn', 'Yahoo', 'WindowsLive', 'Google']
+        if extra_data.class != Hash
+          raise ArgumentError.new("@extra_data must be a Hash.")
+        else
+          @score_service.extra_application_data(application_id, partnerscript_id, extra_data)
+        end
       end
-
       # Posting network tokens, if successful, returns a "Profile ID" which is used when submitting a client for scoring.
       # @param string application_id
       # @param string provider
+      # @param array token_data
       # @param string oauth_key
       # @param string oauth_secret (optional)
-      # @param array token_data
-      def partner_token(application_id, provider, oauth_key, oauth_secret = nil, token_data)
+      def partner_token(application_id, provider, token_data, oauth_key, oauth_secret = nil)
         @network_service ||= NetworkService.new
 
         if !valid_token_providers.include?(provider)
           raise ArgumentError.new("@provider must be one of the following: #{valid_token_providers.join(", ")}")
         else
-          @network_service.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)
+          @network_service.partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
         end
       end
-
       # Submit an application with profile ids for scoring to Lenddo.
       # To perform this step you must have an array of at least one profile id obtained from the PartnerToken call.
       # @param string partner_script_id
@@ -44,6 +51,11 @@ module Lenddo
         else
           @network_service.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
         end
+      end
+
+      private
+      def valid_token_providers
+        ['Facebook', 'LinkedIn', 'Yahoo', 'WindowsLive', 'Google']
       end
     end
   end

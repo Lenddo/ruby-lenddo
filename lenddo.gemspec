@@ -5,13 +5,13 @@ require 'lenddo/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "lenddo"
-  spec.version       = Lenddo::VERSION
+  spec.version       = Lenddo.version
   spec.authors       = ["arjay salvadora"]
   spec.email         = ["arjay@lenddo.com"]
 
   spec.summary       = %q{Lenddo's REST based services}
   spec.homepage      = "https://www.lenddo.com"
-  spec.license       = "Unlicensed"
+  spec.license       = "Unlicense"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
   # to allow pushing to a single host or delete this section to allow pushing to any host.
