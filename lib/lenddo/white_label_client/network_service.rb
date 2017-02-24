@@ -11,7 +11,7 @@ module Lenddo
         JSON.parse(response.body)
       end
 
-      def partner_token(application_id, provider, oauth_key, oauth_secret, token_data)
+      def partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
         body = { "token_data" => { "key" => oauth_key, "secret" => oauth_secret }, "provider" => provider, "client_id" => application_id }
         body['token_data'].merge!(token_data)
         response = signed_request(

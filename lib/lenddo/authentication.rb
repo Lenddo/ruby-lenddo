@@ -34,7 +34,6 @@ module Lenddo
       timestamp = ts.nil? ? Time.now : Time.parse(ts, date_format)
       date = timestamp.strftime(date_format)
       text = [verb, digest, date, path].join("\n")
-      puts text
       {
           'Authorization' => auth_string(text),
           'Content-Type' => 'application/json',

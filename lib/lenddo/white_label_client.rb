@@ -12,18 +12,18 @@ module Lenddo
       # @param string partner_script_id
       # @param array extra_data
       def extra_application_data(application_id, partnerscript_id, extra_data = {})
-        @score_service ||= ScoreService.new
+        @network_service ||= NetworkService.new
 
         if extra_data.class != Hash
           raise ArgumentError.new("@extra_data must be a Hash.")
         else
-          @score_service.extra_application_data(application_id, partnerscript_id, extra_data)
+          @network_service.extra_application_data(application_id, partnerscript_id, extra_data)
         end
       end
       # Posting network tokens, if successful, returns a "Profile ID" which is used when submitting a client for scoring.
       # @param string application_id
       # @param string provider
-      # @param array token_data
+      # @param hash token_data
       # @param string oauth_key
       # @param string oauth_secret (optional)
       def partner_token(application_id, provider, token_data, oauth_key, oauth_secret = nil)
