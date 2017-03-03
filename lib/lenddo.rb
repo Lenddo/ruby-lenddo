@@ -1,5 +1,4 @@
 require "lenddo/configuration"
-require "lenddo/exception"
 require "lenddo/version"
 
 module Lenddo
