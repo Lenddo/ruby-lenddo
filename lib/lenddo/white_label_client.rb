@@ -9,7 +9,7 @@ module Lenddo
       attr_accessor :network_service
       # Submit additional data about an application to Lenddo.
       # @param string application_id
-      # @param string partner_script_id
+      # @param string partnerscript_id
       # @param array extra_data
       def extra_application_data(application_id, partnerscript_id, extra_data = {})
         @network_service ||= NetworkService.new
@@ -37,7 +37,7 @@ module Lenddo
       end
       # Submit an application with profile ids for scoring to Lenddo.
       # To perform this step you must have an array of at least one profile id obtained from the PartnerToken call.
-      # @param string partner_script_id
+      # @param string partnerscript_id
       # @param string application_id
       # @param array profile_ids
       # @param verification - Optional

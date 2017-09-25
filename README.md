@@ -30,7 +30,7 @@ Before making API calls you need to configure `@access_key` and `@secret_key`. T
         config.secret_key = @secret_key
     end
 
-Note: To get your `@access_key` and `@secret_key` go to https://partners.lenddo.com/api_key.
+Note: To get your `@access_key` and `@secret_key` go to https://dashboard.lenddo.com/client/api_key.
 
 ## Service Client
 
@@ -92,7 +92,7 @@ OAuth secret - optional, leave null if not applicable. Some OAuth providers may 
 
 4. **token data** - This is the raw token as it was received from the provider in an Array format. This may include a **extra_data** key.
 
-    Lenddo::WhiteLabelClient.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)
+    `Lenddo::WhiteLabelClient.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)`
 
 #### Errors
 
@@ -116,7 +116,7 @@ CommitPartnerJob has the following arguments:
 
 4. **verification** - This is an optional argument which will allow you to send probe data with the verification object.
 
-    Lenddo::WhiteLabelClient.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
+    `Lenddo::WhiteLabelClient.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)`
 
 #### Errors
 

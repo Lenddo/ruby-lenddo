@@ -11,6 +11,16 @@ module Lenddo
         JSON.parse(response.body)
       end
 
+      def application_multiple_scores(application_id, partnerscript_id)
+        response = signed_request(
+           "GET",
+           Lenddo.configuration.score_service,
+           "/ApplicationMultipleScores/#{application_id}",
+           { "partner_script_id" => partnerscript_id}
+        )
+        JSON.parse(response.body)
+      end
+
       def application_verification(application_id, partnerscript_id)
         response = signed_request(
           "GET",
