@@ -5,16 +5,19 @@ require 'openssl'
 
 module Lenddo
   module Authentication
-    def signed_request(method, host, path, params={})
-      uri = URI.parse(host + path)
+    def signed_request(args)
+      host = args[:host]
+      method = args[:method].downcase
+      path = args[:path]
+      params = args[:params]
 
-      method = method.downcase
       if (method == 'post' || method == 'put')
         body = params
       else
         body = {}
       end
 
+      uri = URI.parse(host + path)
       Curl.send(method.to_s, uri.to_s, params) do |http|
         headers = sign(method.upcase, path, body)
         headers.each do |key, value|
