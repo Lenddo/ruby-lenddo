@@ -42,6 +42,12 @@ To retrieve the score you'll need the application ID and the partner script ID t
 
     Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
 
+### Get Multiple scores
+
+Return an array of LenddoScore records for the supplied application id using models specifically tuned to the applicant pool of the partner associated with the current API user. LenddoScore is a measure of the expected creditworthiness of a Lenddo user. It ranges is from 0 (the highest risk) to 1000 (the lowest risk). Lenddo's scoring algorithms consider over 300 features per user when generating a score. These features are calculated from Lenddo's proprietary social graph as well as from any data specifically shared by the partner. In the event that a score cannot be correctly calculated, the LenddoScore will be returned as -1 along with an array of flag codes.
+
+    Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
+
 ### Get a Verification
 
 To retrieve the verification you'll need the application ID and the partner script ID that you used to create the application.
@@ -118,7 +124,11 @@ CommitPartnerJob has the following arguments:
 
     `Lenddo::WhiteLabelClient.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)`
 
-#### Errors
+### Errors
+
+* **ACCEPTED** *HTTP Status Code: 202* Strictly speaking, not an error. This status code indicates that not enough data has been gathered to compute the applicant's scores, but data will be available in the future.
+
+* **NOT_FOUND** *HTTP Status Code: 404* The specified application_id was not found
 
 * **BAD_REQUEST** *HTTP Status Code: 400* Request was malformed, or missing required data.
 
