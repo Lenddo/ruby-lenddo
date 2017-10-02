@@ -21,6 +21,18 @@ RSpec.describe Lenddo::ServiceClient do
     end
   end
 
+  describe "#application_multiple_scores" do
+    it "behave like" do
+      expect(Lenddo::ServiceClient).to receive(:application_multiple_scores).with("application_id", "partnerscript_id")
+      Lenddo::ServiceClient.application_multiple_scores("application_id", "partnerscript_id")
+    end
+
+    it "response like" do
+      score = Lenddo::ServiceClient.application_multiple_scores("application_id", "partnerscript_id")
+      expect(score).to be_a(Hash)
+    end
+  end
+
   describe "#application_verification" do
     it "behave like" do
       expect(Lenddo::ServiceClient).to receive(:application_verification).with("application_id", "partnerscript_id")
