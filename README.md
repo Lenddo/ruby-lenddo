@@ -79,7 +79,7 @@ If you're sending extra information with your application you can use this metho
 
 *Use Lenddo services while keeping your own branding*
 
-The white label package comes in two service calls made to Lenddo which are meant to allow you to utilize Lenddo services without having the user leave your own ecosystem.
+The white label package comes in two service calls made to Lenddo which are meant to allow you to utilize Lenddo services without having the user leave your own ecosystem. To use run `require 'lenddo/white_label_client'`
 
 ### PartnerToken
 
