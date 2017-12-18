@@ -18,7 +18,14 @@ RSpec.describe Lenddo::Authentication do
     end
 
     it "response like" do
-      response = signed_request("GET", Lenddo.configuration.score_service, "/ApplicationScore/TESTiz6q0wrl", { partner_script_id: ENV['PARTNERSCRIPT_ID'] })
+      response = signed_request(
+        method: "GET",
+        host: Lenddo.configuration.score_service,
+        path: "/ApplicationScore/TESTiz6q0wrl",
+        params: {
+          partner_script_id: ENV['PARTNERSCRIPT_ID']
+        }
+      )
       expect(response.status).to eq('200 OK')
       expect(response.response_code).to eq(200)
       expect(response.body).to be_a(String)

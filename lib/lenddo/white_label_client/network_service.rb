@@ -6,19 +6,28 @@ module Lenddo
           method: "POST",
           host: Lenddo.configuration.network_service,
           path: "/ExtraApplicationData",
-          params: { "application_id" => application_id, "partner_script_id" => partnerscript_id, "extra_data" => extra_data }
+          params: {
+            application_id: application_id,
+            partner_script_id: partnerscript_id,
+            extra_data: extra_data
+          }
         )
         JSON.parse(response.body)
       end
 
       def partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
-        body = { "token_data" => { "key" => oauth_key, "secret" => oauth_secret }, "provider" => provider, "client_id" => application_id }
-        body['token_data'].merge!(token_data)
         response = signed_request(
           method: "POST",
           host: Lenddo.configuration.network_service,
           path: "/PartnerToken",
-          params: body
+          params: {
+            token_data: {
+              key: oauth_key,
+              secret: oauth_secret
+            }.merge!(token_data),
+            provider: provider,
+            client_id: application_id
+          }
         )
         JSON.parse(response.body)
       end
@@ -28,7 +37,12 @@ module Lenddo
           method: "POST",
           host: Lenddo.configuration.network_service,
           path: "/CommitPartnerJob",
-          params: { "client_id" => application_id, "profile_ids" => profile_ids, "partner_script_id" => partnerscript_id, "verification_data" => verification }
+          params: {
+            client_id: application_id,
+            profile_ids: profile_ids,
+            partner_script_id: partnerscript_id,
+            verification_data: verification
+          }
         )
         JSON.parse(response.body)
       end
