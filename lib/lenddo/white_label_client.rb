@@ -1,3 +1,4 @@
+require "lenddo"
 require "lenddo/authentication"
 require "lenddo/white_label_client/network_service"
 
@@ -31,6 +32,8 @@ module Lenddo
 
         if !valid_token_providers.include?(provider)
           raise ArgumentError.new("@provider must be one of the following: #{valid_token_providers.join(", ")}")
+        elsif token_data.class != Hash
+          raise ArgumentError.new("@token_data must be a Hash.")
         else
           @network_service.partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
         end

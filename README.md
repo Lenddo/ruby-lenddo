@@ -11,7 +11,7 @@ gem 'lenddo'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -34,7 +34,11 @@ Note: To get your `@access_key` and `@secret_key` go to https://dashboard.lenddo
 
 ## Service Client
 
-The `ServiceClient` allows the client to send extra information or retrieve the scoring, verification, and decision results from Lenddo. To use run `require 'lenddo/service_client'`
+The `ServiceClient` allows the client to send extra information or retrieve the scoring, verification, and decision results from Lenddo.
+
+To use run:
+    
+    require 'lenddo/service_client'
 
 ### Get a Score
 
@@ -80,6 +84,10 @@ If you're sending extra information with your application you can use this metho
 *Use Lenddo services while keeping your own branding*
 
 The white label package comes in two service calls made to Lenddo which are meant to allow you to utilize Lenddo services without having the user leave your own ecosystem.
+
+To use run:
+
+    require 'lenddo/white_label_client'
 
 ### PartnerToken
 
