@@ -6,7 +6,9 @@ module Lenddo
           method: "GET",
           host: Lenddo.configuration.score_service,
           path: "/ClientScore/#{application_id}",
-          params: { "partner_script_id" => partnerscript_id }
+          params: {
+            partner_script_id: partnerscript_id
+          }
         )
         JSON.parse(response.body)
       end
@@ -16,7 +18,9 @@ module Lenddo
           method: "GET",
           host: Lenddo.configuration.score_service,
           path: "/ApplicationMultipleScores/#{application_id}",
-          params: { "partner_script_id" => partnerscript_id }
+          params: {
+            partner_script_id: partnerscript_id
+          }
         )
         JSON.parse(response.body)
       end
@@ -26,7 +30,9 @@ module Lenddo
           method: "GET",
           host: Lenddo.configuration.score_service,
           path: "/ClientVerification/#{application_id}",
-          params: { "partner_script_id" => partnerscript_id }
+          params: {
+            partner_script_id: partnerscript_id
+          }
         )
         JSON.parse(response.body)
       end
@@ -36,7 +42,9 @@ module Lenddo
           method: "GET",
           host: Lenddo.configuration.score_service,
           path: "/ApplicationDecision/#{application_id}",
-          params: { "partner_script_id" => partnerscript_id }
+          params: {
+            partner_script_id: partnerscript_id
+          }
         )
         JSON.parse(response.body)
       end
