@@ -104,7 +104,7 @@ PartnerToken has the following arguments:
     note: The key and secret are not your application key and secret. They're the values which are returned after a user successfully authenticates with the social network's OAuth.
 OAuth secret - optional, leave null if not applicable. Some OAuth providers may return a secret when this is returned Lenddo will require the secret to using the token.
 
-4. **token data** - This is the raw token as it was received from the provider in an Array format. This may include a **extra_data** key.
+4. **token data** - This is the raw token as it was received from the provider in an Hash format. This may include a **extra_data** key.
 
     `Lenddo::WhiteLabelClient.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)`
 
