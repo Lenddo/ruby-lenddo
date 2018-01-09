@@ -32,7 +32,7 @@ module Lenddo
 
         if !valid_token_providers.include?(provider)
           raise ArgumentError.new("@provider must be one of the following: #{valid_token_providers.join(", ")}")
-        elsif token_data.class != Hash
+        elsif !token_data.is_a?(Hash)
           raise ArgumentError.new("@token_data must be a Hash.")
         else
           @network_service.partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
@@ -47,10 +47,10 @@ module Lenddo
       def commit_partner_job(partnerscript_id, application_id, profile_ids, verification = nil)
         @network_service ||= NetworkService.new
 
-        if profile_ids.empty?
-          raise ArgumentError.new("@profile_ids must contain at least one entry.")
-        elsif profile_ids.class != Array
+        if !profile_ids.is_a?(Array)
           raise ArgumentError.new("@profile_ids must be an array.")
+        elsif profile_ids.empty?
+          raise ArgumentError.new("@profile_ids must contain at least one entry.")
         else
           @network_service.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
         end
