@@ -36,33 +36,37 @@ Note: To get your `@access_key` and `@secret_key` go to https://dashboard.lenddo
 
 The `ServiceClient` allows the client to send extra information or retrieve the scoring, verification, and decision results from Lenddo.
 
-To use run:
-    
-    require 'lenddo/service_client'
-
 ### Get a Score
 
 To retrieve the score you'll need the application ID and the partner script ID that you used to create the application.
 
-    Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
+        require 'lenddo/service_client'
+        
+        Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
 
 ### Get Multiple scores
 
 Return an array of LenddoScore records for the supplied application id using models specifically tuned to the applicant pool of the partner associated with the current API user. LenddoScore is a measure of the expected creditworthiness of a Lenddo user. It ranges is from 0 (the highest risk) to 1000 (the lowest risk). Lenddo's scoring algorithms consider over 300 features per user when generating a score. These features are calculated from Lenddo's proprietary social graph as well as from any data specifically shared by the partner. In the event that a score cannot be correctly calculated, the LenddoScore will be returned as -1 along with an array of flag codes.
 
-    Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
+        require 'lenddo/service_client'
+        
+        Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
 
 ### Get a Verification
 
 To retrieve the verification you'll need the application ID and the partner script ID that you used to create the application.
 
-    Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
+        require 'lenddo/service_client'
+        
+        Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
     
 ### Get an Application Decision
 
 To retrieve the decision you'll need the application ID and the partner script ID that you used to create the application.
 
-    Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
+        require 'lenddo/service_client'
+        
+        Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
 
 ### Send Extra Application Data
 
@@ -85,10 +89,6 @@ If you're sending extra information with your application you can use this metho
 
 The white label package comes in two service calls made to Lenddo which are meant to allow you to utilize Lenddo services without having the user leave your own ecosystem.
 
-To use run:
-
-    require 'lenddo/white_label_client'
-
 ### PartnerToken
 
 **Note**: All token providers must be OAuth 2.0
@@ -106,7 +106,14 @@ OAuth secret - optional, leave null if not applicable. Some OAuth providers may 
 
 4. **token data** - This is the raw token as it was received from the provider in an Hash format. This may include a **extra_data** key.
 
-    `Lenddo::WhiteLabelClient.partner_token(application_id, provider, oauth_key, oauth_secret, token_data)`
+        require 'lenddo/white_label_client'
+        
+        application_id = "GENERATED_UNIQUE_ID"
+        oauth_key = "USER_ACCESS_TOKEN"
+        
+        Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
+        # response example - {"profile_id"=>"100000000000000FB"}
+    
 
 #### Errors
 
@@ -130,7 +137,14 @@ CommitPartnerJob has the following arguments:
 
 4. **verification** - This is an optional argument which will allow you to send probe data with the verification object.
 
-    `Lenddo::WhiteLabelClient.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)`
+        require 'lenddo/white_label_client'
+        
+        partnerscript_id = "YOUR_PARTNERSCRIPT_ID"
+        application_id = "GENERATED_UNIQUE_ID"
+        profile_ids = ["100000000000000FB"]
+        
+        Lenddo::WhiteLabelClient.commit_partner_job(@partnerscript_id, @application_id, @profile_ids, verification = nil)
+        # response example - {"success": true}
 
 ### Errors
 
