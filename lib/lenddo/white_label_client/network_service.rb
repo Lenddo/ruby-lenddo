@@ -10,7 +10,7 @@ module Lenddo
             application_id: application_id,
             partner_script_id: partnerscript_id,
             extra_data: extra_data
-          }
+          }.to_json
         )
         JSON.parse(response.body)
       end
@@ -27,7 +27,7 @@ module Lenddo
             }.merge!(token_data),
             provider: provider,
             client_id: application_id
-          }
+          }.to_json
         )
         JSON.parse(response.body)
       end
@@ -42,7 +42,7 @@ module Lenddo
             profile_ids: profile_ids,
             partner_script_id: partnerscript_id,
             verification_data: verification
-          }
+          }.to_json
         )
         JSON.parse(response.body)
       end

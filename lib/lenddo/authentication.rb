@@ -33,7 +33,7 @@ module Lenddo
     private
     def sign(verb, path, body, ts = nil)
       date_format = "%a %b %d %H:%M:%S %Z %Y"
-      digest = body.empty? ? "" : Digest::MD5.hexdigest(URI.encode_www_form(body))
+      digest = body.empty? ? "" : Digest::MD5.hexdigest(body)
       timestamp = ts.nil? ? Time.now : Time.parse(ts, date_format)
       date = timestamp.strftime(date_format)
       text = [verb, digest, date, path].join("\n")
