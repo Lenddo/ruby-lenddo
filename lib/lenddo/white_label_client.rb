@@ -1,6 +1,6 @@
 require "lenddo"
 require "lenddo/authentication"
-require "lenddo/white_label_client/network_service"
+require "lenddo/network_service/self"
 
 include Lenddo::Authentication
 

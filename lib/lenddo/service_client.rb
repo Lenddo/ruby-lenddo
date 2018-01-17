@@ -1,6 +1,6 @@
 require "lenddo"
 require "lenddo/authentication"
-require "lenddo/service_client/score_service"
+require "lenddo/score_service/self"
 
 include Lenddo::Authentication
 
