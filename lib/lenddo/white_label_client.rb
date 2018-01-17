@@ -56,6 +56,13 @@ module Lenddo
         end
       end
 
+      # Get mobile data using the partner_script_id
+      # @param string partnerscript_id
+      def mobile_data(partnerscript_id)
+        @network_service ||= NetworkService.new
+        @network_service.mobile_data(partnerscript_id)
+      end
+
       private
       def valid_token_providers
         ['Facebook', 'LinkedIn', 'Yahoo', 'WindowsLive', 'Google']

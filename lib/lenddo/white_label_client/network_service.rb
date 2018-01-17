@@ -46,6 +46,18 @@ module Lenddo
         )
         JSON.parse(response.body)
       end
+
+      def mobile_data(partnerscript_id)
+        response = signed_request(
+          method: "GET",
+          host: Lenddo.configuration.network_service,
+          path: "/MobileData",
+          params: {
+            partner_script_id: partnerscript_id
+          }.to_json
+        )
+        JSON.parse(response.body)
+      end
     end
   end
 end
