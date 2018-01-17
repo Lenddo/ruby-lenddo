@@ -54,7 +54,7 @@ module Lenddo
           path: "/MobileData",
           params: {
             partner_script_id: partnerscript_id
-          }.to_json
+          }
         )
         JSON.parse(response.body)
       end
