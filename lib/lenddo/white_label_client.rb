@@ -1,6 +1,6 @@
 require "lenddo"
 require "lenddo/authentication"
-require "lenddo/white_label_client/network_service"
+require "lenddo/network_service/self"
 
 include Lenddo::Authentication
 
@@ -15,7 +15,7 @@ module Lenddo
       def extra_application_data(application_id, partnerscript_id, extra_data = {})
         @network_service ||= NetworkService.new
 
-        if extra_data.class != Hash
+        if !extra_data.is_a?(Hash)
           raise ArgumentError.new("@extra_data must be a Hash.")
         else
           @network_service.extra_application_data(application_id, partnerscript_id, extra_data)
