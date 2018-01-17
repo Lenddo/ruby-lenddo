@@ -44,16 +44,4 @@ RSpec.describe Lenddo::WhiteLabelClient do
       expect(commit_partner_job).to be_a(Hash)
     end
   end
-
-  describe "#mobile_data" do
-    it "behave like" do
-      expect(Lenddo::WhiteLabelClient).to receive(:mobile_data).with("partnerscript_id")
-      Lenddo::WhiteLabelClient.mobile_data("partnerscript_id")
-    end
-
-    it "response like" do
-      mobile_data = Lenddo::WhiteLabelClient.mobile_data("partnerscript_id")
-      expect(mobile_data).to be_a(Hash)
-    end
-  end
 end

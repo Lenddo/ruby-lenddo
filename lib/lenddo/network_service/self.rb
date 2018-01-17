@@ -1,5 +1,17 @@
 module Lenddo
   class NetworkService
+    def mobile_data(partnerscript_id)
+      response = signed_request(
+        method: "GET",
+        host: Lenddo.configuration.network_service,
+        path: "/MobileData",
+        params: {
+          partner_script_id: partnerscript_id
+        }
+      )
+      JSON.parse(response.body)
+    end
+
     def extra_application_data(application_id, partnerscript_id, extra_data)
       response = signed_request(
         method: "POST",
@@ -42,18 +54,6 @@ module Lenddo
           partner_script_id: partnerscript_id,
           verification_data: verification
         }.to_json
-      )
-      JSON.parse(response.body)
-    end
-
-    def mobile_data(partnerscript_id)
-      response = signed_request(
-        method: "GET",
-        host: Lenddo.configuration.network_service,
-        path: "/MobileData",
-        params: {
-          partner_script_id: partnerscript_id
-        }
       )
       JSON.parse(response.body)
     end

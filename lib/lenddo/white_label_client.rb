@@ -15,7 +15,7 @@ module Lenddo
       def extra_application_data(application_id, partnerscript_id, extra_data = {})
         @network_service ||= NetworkService.new
 
-        if extra_data.class != Hash
+        if !extra_data.is_a?(Hash)
           raise ArgumentError.new("@extra_data must be a Hash.")
         else
           @network_service.extra_application_data(application_id, partnerscript_id, extra_data)
@@ -54,13 +54,6 @@ module Lenddo
         else
           @network_service.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
         end
-      end
-
-      # Get mobile data using the partner_script_id
-      # @param string partnerscript_id
-      def mobile_data(partnerscript_id)
-        @network_service ||= NetworkService.new
-        @network_service.mobile_data(partnerscript_id)
       end
 
       private

@@ -36,6 +36,13 @@ module Lenddo
         @score_service ||= ScoreService.new
         @score_service.application_decision(application_id, partnerscript_id)
       end
+
+      # Get mobile data using the partner_script_id
+      # @param string partnerscript_id
+      def mobile_data(partnerscript_id)
+        @network_service ||= NetworkService.new
+        @network_service.mobile_data(partnerscript_id)
+      end
     end
   end
 end
