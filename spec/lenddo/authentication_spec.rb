@@ -13,15 +13,15 @@ RSpec.describe Lenddo::Authentication do
 
   describe "#signed_request" do
     it "behave like" do
-      expect(Lenddo::Authentication).to receive(:signed_request).with("GET", Lenddo.configuration.score_service, "/ApplicationScore/TESTiz6q0wrl", { partner_script_id: ENV['PARTNERSCRIPT_ID'] })
-      Lenddo::Authentication.signed_request("GET", Lenddo.configuration.score_service, "/ApplicationScore/TESTiz6q0wrl", { partner_script_id: ENV['PARTNERSCRIPT_ID'] })
+      expect(Lenddo::Authentication).to receive(:signed_request).with("GET", Lenddo.configuration.score_service, "/ApplicationScore/#{ENV['APPLICATION_ID']}", { partner_script_id: ENV['PARTNERSCRIPT_ID'] })
+      Lenddo::Authentication.signed_request("GET", Lenddo.configuration.score_service, "/ApplicationScore/#{ENV['APPLICATION_ID']}", { partner_script_id: ENV['PARTNERSCRIPT_ID'] })
     end
 
     it "response like" do
       response = signed_request(
         method: "GET",
         host: Lenddo.configuration.score_service,
-        path: "/ApplicationScore/TESTiz6q0wrl",
+        path: "/ApplicationScore/#{ENV['APPLICATION_ID']}",
         params: {
           partner_script_id: ENV['PARTNERSCRIPT_ID']
         }

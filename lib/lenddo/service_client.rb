@@ -1,6 +1,6 @@
 require "lenddo"
 require "lenddo/authentication"
-require "lenddo/service_client/score_service"
+require "lenddo/score_service/self"
 
 include Lenddo::Authentication
 
@@ -35,6 +35,13 @@ module Lenddo
       def application_decision(application_id, partnerscript_id)
         @score_service ||= ScoreService.new
         @score_service.application_decision(application_id, partnerscript_id)
+      end
+
+      # Get mobile data using the partner_script_id
+      # @param string partnerscript_id
+      def mobile_data(partnerscript_id)
+        @network_service ||= NetworkService.new
+        @network_service.mobile_data(partnerscript_id)
       end
     end
   end

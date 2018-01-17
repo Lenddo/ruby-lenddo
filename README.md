@@ -68,6 +68,14 @@ To retrieve the decision you'll need the application ID and the partner script I
         
         Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
 
+### Get MobileData
+
+If you want to retrieve the mobile data stream from your partner script ID you can use this method.
+
+        require 'lenddo/service_client'
+        
+        Lenddo::ServiceClient.mobile_data(@partnerscript_id)
+
 ### Send Extra Application Data
 
 If you're sending extra information with your application you can use this method to submit it. Extra Application Data may be used to enhance the model performance based on data you may already have about a user.
