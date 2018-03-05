@@ -132,13 +132,17 @@ OAuth secret - optional, leave null if not applicable. Some OAuth providers may 
         application_id = "GENERATED_UNIQUE_ID"
         oauth_key = "USER_ACCESS_TOKEN"
         
-        Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
+        response = Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
         
     Response:
         
-        {"profile_id"=>"100000000000000FB"}
+        puts response.response_code
+        => 200
+        puts response.status
+        => "200 OK"
+        puts response.body
+        => "{\"profile_id\"=>\"100000000000000FB\"}"
     
-
 #### Errors
 
 * **BAD_REQUEST** *HTTP Status Code: 400* Request was malformed, or missing required data.
@@ -190,7 +194,12 @@ CommitPartnerJob has the following arguments:
            "university": "University Name",
            "email": "John@gmail.com",
            "work_email": "John@work.com",
-           "address": { 
+           "address": {
+               "latitude" : "40.758896",
+               "longitude" : "-73.985130",
+               "line_1": "Street 1",
+               "line_2": "Street 2",
+               "administrative_division" : "Manhattan",
                "city": "New York", 
                "postal_code":"39531",
                "country_code: "USA"
@@ -205,11 +214,16 @@ CommitPartnerJob has the following arguments:
        application_id = "GENERATED_UNIQUE_ID"
        profile_ids = ["100000000000000FB"]
         
-       Lenddo::WhiteLabelClient.commit_partner_job(@partnerscript_id, @application_id, @profile_ids, verification = nil)
+       response = Lenddo::WhiteLabelClient.commit_partner_job(@partnerscript_id, @application_id, @profile_ids, verification = nil)
        
    Response:
        
-       {"success": true}
+       puts response.response_code
+       => 200
+       puts response.status
+       => "200 OK"
+       puts response.body
+       => "{\"success\": true}"
 
 ### Errors
 
