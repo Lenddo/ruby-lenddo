@@ -40,42 +40,53 @@ The `ServiceClient` allows the client to send extra information or retrieve the 
 
 To retrieve the score you'll need the application ID and the partner script ID that you used to create the application.
 
-        require 'lenddo/service_client'
+   Usage:
+   
+       require 'lenddo/service_client'
         
-        Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
+       Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
 
 ### Get Multiple scores
 
 Return an array of LenddoScore records for the supplied application id using models specifically tuned to the applicant pool of the partner associated with the current API user. LenddoScore is a measure of the expected creditworthiness of a Lenddo user. It ranges is from 0 (the highest risk) to 1000 (the lowest risk). Lenddo's scoring algorithms consider over 300 features per user when generating a score. These features are calculated from Lenddo's proprietary social graph as well as from any data specifically shared by the partner. In the event that a score cannot be correctly calculated, the LenddoScore will be returned as -1 along with an array of flag codes.
 
-        require 'lenddo/service_client'
+   Usage:
+   
+       require 'lenddo/service_client'
         
-        Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
+       Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
 
 ### Get a Verification
 
 To retrieve the verification you'll need the application ID and the partner script ID that you used to create the application.
 
-        require 'lenddo/service_client'
+   Usage:
+    
+       require 'lenddo/service_client'
         
-        Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
+       Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
     
 ### Get an Application Decision
 
 To retrieve the decision you'll need the application ID and the partner script ID that you used to create the application.
 
-        require 'lenddo/service_client'
+   Usage:    
+       
+       require 'lenddo/service_client'
         
-        Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
+       Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
 
 ### Get MobileData
 
 If you want to retrieve the mobile data stream from your partner script ID you can use this method.
 
-        require 'lenddo/service_client'
-        
-        Lenddo::ServiceClient.mobile_data(@partnerscript_id)
-
+   Usage:
+   
+       require 'lenddo/service_client'
+                
+       Lenddo::ServiceClient.mobile_data(@partnerscript_id)
+ 
+    
 ### Send Extra Application Data
 
 If you're sending extra information with your application you can use this method to submit it. Extra Application Data may be used to enhance the model performance based on data you may already have about a user.
@@ -109,20 +120,29 @@ PartnerToken has the following arguments:
 
 3. **OAuth key** - this is the key returned by OAuth for interacting with the token.
 
-    note: The key and secret are not your application key and secret. They're the values which are returned after a user successfully authenticates with the social network's OAuth.
+    Note: The key and secret are not your application key and secret. They're the values which are returned after a user successfully authenticates with the social network's OAuth.
 OAuth secret - optional, leave null if not applicable. Some OAuth providers may return a secret when this is returned Lenddo will require the secret to using the token.
 
 4. **token data** - This is the raw token as it was received from the provider in an Hash format. This may include a **extra_data** key.
+
+    Usage:
 
         require 'lenddo/white_label_client'
         
         application_id = "GENERATED_UNIQUE_ID"
         oauth_key = "USER_ACCESS_TOKEN"
         
-        Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
-        # response example - {"profile_id"=>"100000000000000FB"}
+        response = Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
+        
+    Response:
+        
+        puts response.response_code
+        => 200
+        puts response.status
+        => "200 OK"
+        puts response.body
+        => "{\"profile_id\"=>\"100000000000000FB\"}"
     
-
 #### Errors
 
 * **BAD_REQUEST** *HTTP Status Code: 400* Request was malformed, or missing required data.
@@ -144,15 +164,66 @@ CommitPartnerJob has the following arguments:
 3. **profile ids** - This is an array of ID's composed from the results of the `Lenddo::WhiteLabelClient.partner_token` service call.
 
 4. **verification** - This is an optional argument which will allow you to send probe data with the verification object.
+   
+   Sample verification object:
+   
+       verificationData = {
+           "name": {
+               "first": "John",
+               "middle": "J",
+               "last": "Doe"
+            },
+           "date_of_birth": "1990-01-01",
+           "employer": "LenddoEFL",
+           "phone": { 
+               "mobile": "55512456789", 
+               "home": "0254897" 
+           },
+           "employment_period": { 
+               "start_date": "2010-05-01", 
+               "end_date": "2015-02-30"
+           },
+           "mothers_maiden_name": {
+               "first": "Martha",
+               "middle": "K",
+               "last": "Smith"
+           },
+           "government_ids": {[
+               "ID1": "555"
+           ]},
+           "university": "University Name",
+           "email": "John@gmail.com",
+           "work_email": "John@work.com",
+           "address": {
+               "latitude" : "40.758896",
+               "longitude" : "-73.985130",
+               "line_1": "Street 1",
+               "line_2": "Street 2",
+               "administrative_division" : "Manhattan",
+               "city": "New York", 
+               "postal_code":"39531",
+               "country_code: "USA"
+           }
+       }   
 
-        require 'lenddo/white_label_client'
+   Usage:
+
+       require 'lenddo/white_label_client'
         
-        partnerscript_id = "YOUR_PARTNERSCRIPT_ID"
-        application_id = "GENERATED_UNIQUE_ID"
-        profile_ids = ["100000000000000FB"]
+       partnerscript_id = "YOUR_PARTNERSCRIPT_ID"
+       application_id = "GENERATED_UNIQUE_ID"
+       profile_ids = ["100000000000000FB"]
         
-        Lenddo::WhiteLabelClient.commit_partner_job(@partnerscript_id, @application_id, @profile_ids, verification = nil)
-        # response example - {"success": true}
+       response = Lenddo::WhiteLabelClient.commit_partner_job(@partnerscript_id, @application_id, @profile_ids, verification = nil)
+       
+   Response:
+       
+       puts response.response_code
+       => 200
+       puts response.status
+       => "200 OK"
+       puts response.body
+       => "{\"success\": true}"
 
 ### Errors
 

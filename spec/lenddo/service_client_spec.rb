@@ -17,7 +17,9 @@ RSpec.describe Lenddo::ServiceClient do
 
     it "response like" do
       score = Lenddo::ServiceClient.application_score("application_id", "partnerscript_id")
-      expect(score).to be_a(Hash)
+      expect(score.response_code).to be_a(Fixnum)
+      expect(score.status).to be_a(String)
+      expect(score.body).to be_a(String)
     end
   end
 
@@ -29,7 +31,9 @@ RSpec.describe Lenddo::ServiceClient do
 
     it "response like" do
       score = Lenddo::ServiceClient.application_multiple_scores("application_id", "partnerscript_id")
-      expect(score).to be_a(Hash)
+      expect(score.response_code).to be_a(Fixnum)
+      expect(score.status).to be_a(String)
+      expect(score.body).to be_a(String)
     end
   end
 
@@ -41,7 +45,9 @@ RSpec.describe Lenddo::ServiceClient do
 
     it "response like" do
       verification = Lenddo::ServiceClient.application_verification("application_id", "partnerscript_id")
-      expect(verification).to be_a(Hash)
+      expect(verification.response_code).to be_a(Fixnum)
+      expect(verification.status).to be_a(String)
+      expect(verification.body).to be_a(String)
     end
   end
 
@@ -53,7 +59,9 @@ RSpec.describe Lenddo::ServiceClient do
 
     it "response like" do
       decision = Lenddo::ServiceClient.application_decision("application_id", "partnerscript_id")
-      expect(decision).to be_a(Hash)
+      expect(decision.response_code).to be_a(Fixnum)
+      expect(decision.status).to be_a(String)
+      expect(decision.body).to be_a(String)
     end
   end
 
@@ -65,7 +73,9 @@ RSpec.describe Lenddo::ServiceClient do
 
     it "response like" do
       mobile_data = Lenddo::ServiceClient.mobile_data("partnerscript_id")
-      expect(mobile_data).to be_a(Hash)
+      expect(mobile_data.response_code).to be_a(Fixnum)
+      expect(mobile_data.status).to be_a(String)
+      expect(mobile_data.body).to be_a(String)
     end
   end
 end

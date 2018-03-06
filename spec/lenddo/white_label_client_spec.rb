@@ -17,7 +17,9 @@ RSpec.describe Lenddo::WhiteLabelClient do
 
     it "response like" do
       extra_application_data = Lenddo::WhiteLabelClient.extra_application_data("application_id","partnerscript_id", {})
-      expect(extra_application_data).to be_a(Hash)
+      expect(extra_application_data.response_code).to be_a(Fixnum)
+      expect(extra_application_data.status).to be_a(String)
+      expect(extra_application_data.body).to be_a(String)
     end
   end
 
@@ -29,7 +31,9 @@ RSpec.describe Lenddo::WhiteLabelClient do
 
     it "response like" do
       partner_token = Lenddo::WhiteLabelClient.partner_token("application_id","Facebook", { "rspec" => "great"}, "oauth_key", "oauth_secret")
-      expect(partner_token).to be_a(Hash)
+      expect(partner_token.response_code).to be_a(Fixnum)
+      expect(partner_token.status).to be_a(String)
+      expect(partner_token.body).to be_a(String)
     end
   end
 
@@ -41,7 +45,9 @@ RSpec.describe Lenddo::WhiteLabelClient do
 
     it "response like" do
       commit_partner_job = Lenddo::WhiteLabelClient.commit_partner_job("partnerscript_id", "application_id", ["ruby@lenddo.com"], nil)
-      expect(commit_partner_job).to be_a(Hash)
+      expect(commit_partner_job.response_code).to be_a(Fixnum)
+      expect(commit_partner_job.status).to be_a(String)
+      expect(commit_partner_job.body).to be_a(String)
     end
   end
 end
