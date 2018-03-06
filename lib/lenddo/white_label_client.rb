@@ -1,5 +1,6 @@
 require "lenddo"
 require "lenddo/authentication"
+require "lenddo/response"
 require "lenddo/network_service/self"
 
 include Lenddo::Authentication
@@ -18,7 +19,7 @@ module Lenddo
         if !extra_data.is_a?(Hash)
           raise ArgumentError.new("@extra_data must be a Hash.")
         else
-          @network_service.extra_application_data(application_id, partnerscript_id, extra_data)
+          Response.new @network_service.extra_application_data(application_id, partnerscript_id, extra_data)
         end
       end
       # Posting network tokens, if successful, returns a "Profile ID" which is used when submitting a client for scoring.
@@ -35,7 +36,7 @@ module Lenddo
         elsif !token_data.is_a?(Hash)
           raise ArgumentError.new("@token_data must be a Hash.")
         else
-          @network_service.partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
+          Response.new @network_service.partner_token(application_id, provider, token_data, oauth_key, oauth_secret)
         end
       end
       # Submit an application with profile ids for scoring to Lenddo.
@@ -52,7 +53,7 @@ module Lenddo
         elsif profile_ids.empty?
           raise ArgumentError.new("@profile_ids must contain at least one entry.")
         else
-          @network_service.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
+          Response.new @network_service.commit_partner_job(partnerscript_id, application_id, profile_ids, verification)
         end
       end
 
