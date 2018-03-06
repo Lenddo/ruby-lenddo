@@ -2,7 +2,7 @@
 
 ruby-lenddo allow you to contact Lenddo's REST based services.
 
-Note: 2.0 is not compatible with 1.X.X version for more info click[here](https://github.com/Lenddo/ruby-lenddo/wiki/Breaking-changes-with-2.0)
+Note: 2.0 is not compatible with 1.X.X version for more info click [here](https://github.com/Lenddo/ruby-lenddo/wiki/Breaking-changes-with-2.0)
 
 ## Installation
 
