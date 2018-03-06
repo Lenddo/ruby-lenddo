@@ -141,7 +141,7 @@ OAuth secret - optional, leave null if not applicable. Some OAuth providers may 
         puts response.status
         => "200 OK"
         puts response.body
-        => "{\"profile_id\"=>\"100000000000000FB\"}"
+        => {"profile_id": "100000000000000FB"}"
     
 #### Errors
 
@@ -223,7 +223,7 @@ CommitPartnerJob has the following arguments:
        puts response.status
        => "200 OK"
        puts response.body
-       => "{\"success\": true}"
+       => {"success": true}
 
 ### Errors
 
