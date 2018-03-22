@@ -1,6 +1,9 @@
 # ruby-lenddo
 
 ruby-lenddo allow you to contact Lenddo's REST based services.
+
+Note: 2.0 is not compatible with 1.X.X version for more info click [here](https://github.com/Lenddo/ruby-lenddo/wiki/Breaking-changes-with-2.0)
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -40,51 +43,51 @@ The `ServiceClient` allows the client to send extra information or retrieve the 
 
 To retrieve the score you'll need the application ID and the partner script ID that you used to create the application.
 
-   Usage:
+Usage:
    
-       require 'lenddo/service_client'
+    require 'lenddo/service_client'
         
-       Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
+    Lenddo::ServiceClient.application_score(@application_id, @partnerscript_id)
 
 ### Get Multiple scores
 
 Return an array of LenddoScore records for the supplied application id using models specifically tuned to the applicant pool of the partner associated with the current API user. LenddoScore is a measure of the expected creditworthiness of a Lenddo user. It ranges is from 0 (the highest risk) to 1000 (the lowest risk). Lenddo's scoring algorithms consider over 300 features per user when generating a score. These features are calculated from Lenddo's proprietary social graph as well as from any data specifically shared by the partner. In the event that a score cannot be correctly calculated, the LenddoScore will be returned as -1 along with an array of flag codes.
 
-   Usage:
+Usage:
    
-       require 'lenddo/service_client'
+    require 'lenddo/service_client'
         
-       Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
+    Lenddo::ServiceClient.application_multiple_scores(@application_id, @partnerscript_id)
 
 ### Get a Verification
 
 To retrieve the verification you'll need the application ID and the partner script ID that you used to create the application.
 
-   Usage:
+Usage:
     
-       require 'lenddo/service_client'
+    require 'lenddo/service_client'
         
-       Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
+    Lenddo::ServiceClient.application_verification(@application_id, @partnerscript_id)
     
 ### Get an Application Decision
 
 To retrieve the decision you'll need the application ID and the partner script ID that you used to create the application.
 
-   Usage:    
+Usage:    
        
-       require 'lenddo/service_client'
+    require 'lenddo/service_client'
         
-       Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
+    Lenddo::ServiceClient.application_decision(@application_id, @partnerscript_id)
 
 ### Get MobileData
 
 If you want to retrieve the mobile data stream from your partner script ID you can use this method.
 
-   Usage:
+Usage:
    
-       require 'lenddo/service_client'
+    require 'lenddo/service_client'
                 
-       Lenddo::ServiceClient.mobile_data(@partnerscript_id)
+    Lenddo::ServiceClient.mobile_data(@partnerscript_id)
  
     
 ### Send Extra Application Data
@@ -125,23 +128,23 @@ OAuth secret - optional, leave null if not applicable. Some OAuth providers may 
 
 4. **token data** - This is the raw token as it was received from the provider in an Hash format. This may include a **extra_data** key.
 
-    Usage:
+   Usage:
 
-        require 'lenddo/white_label_client'
+       require 'lenddo/white_label_client'
         
-        application_id = "GENERATED_UNIQUE_ID"
-        oauth_key = "USER_ACCESS_TOKEN"
+       application_id = "GENERATED_UNIQUE_ID"
+       oauth_key = "USER_ACCESS_TOKEN"
         
-        response = Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
+       response = Lenddo::WhiteLabelClient.partner_token(@application_id, provider = "Facebook", @oauth_key, oauth_secret = nil, token_data = {})
         
-    Response:
+   Response:
         
-        puts response.response_code
-        => 200
-        puts response.status
-        => "200 OK"
-        puts response.body
-        => {"profile_id": "100000000000000FB"}"
+       puts response.response_code
+       => 200
+       puts response.status
+       => "200 OK"
+       puts response.body
+       => {"profile_id": "100000000000000FB"}"
     
 #### Errors
 
