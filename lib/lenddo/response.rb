@@ -13,7 +13,7 @@ module Lenddo
     end
 
     def body
-      if @http_response.code >= 500
+      if @http_response.response_code >= 500
         # Will just prettify the #status it will
         # remove the http code and titleize the message.
         # 404 NOT FOUND => Not Found
