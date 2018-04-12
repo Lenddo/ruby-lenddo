@@ -15,12 +15,15 @@ end
 RSpec.describe Lenddo::Response do
   it "should not raise an UnknownError when json is valid" do
     mock_response = MockResponse.new(200, '{"hello": 1}')
-    Lenddo::Response.new mock_response
+    response = Lenddo::Response.new mock_response
+    expect(response.body).to be_a(Hash)
   end
 
   it "should raise an UnknownError when something fails" do
     mock_response = MockResponse.new(200, "<html></html>")
-    expect{Lenddo::Response.new mock_response}.to raise_error(Lenddo::Errors::UnknownException)
+    expect{
+      Lenddo::Response.new(mock_response).body
+    }.to raise_error(Lenddo::Errors::UnknownException)
   end
 
   it "should raise Lenddo::Errors::InternalErrorException on HTTP 500" do
