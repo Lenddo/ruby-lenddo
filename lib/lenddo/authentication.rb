@@ -2,6 +2,7 @@ require 'base64'
 require 'curb'
 require 'json'
 require 'openssl'
+require 'lenddo/errors/exceptions'
 
 module Lenddo
   module Authentication
@@ -18,15 +19,23 @@ module Lenddo
       end
 
       uri = URI.parse(host + path)
-      Curl.send(method.to_s, uri.to_s, params) do |http|
-        headers = sign(method.upcase, path, body)
-        headers.each do |key, value|
-          http.headers[key] = value.chomp
-        end
+      begin
+        Curl.send(method.to_s, uri.to_s, params) do |http|
+          headers = sign(method.upcase, path, body)
+          headers.each do |key, value|
+            http.headers[key] = value.chomp
+          end
 
-        http.use_ssl = 3
-        http.ssl_verify_host = OpenSSL::SSL::VERIFY_PEER
-        http.cacert = File.absolute_path("./cacert.pem") if RbConfig::CONFIG['host_os'] == 'mingw32'
+          http.use_ssl = 3
+          http.ssl_verify_host = OpenSSL::SSL::VERIFY_PEER
+          http.cacert = File.absolute_path("./cacert.pem") if RbConfig::CONFIG['host_os'] == 'mingw32'
+        end
+      rescue Curl::Err::TimeoutError => e
+        raise Lenddo::Errors::TimeoutException.new(e.message)
+      rescue Curl::Err::HostResolutionError => e
+        raise Lenddo::Errors::HostResolutionError.new(e.message)
+      rescue => e
+        raise Lenddo::Errors::UnknownException.new(e.message)
       end
     end
 
