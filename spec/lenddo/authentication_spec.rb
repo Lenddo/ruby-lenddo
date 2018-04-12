@@ -1,7 +1,6 @@
 require "lenddo/authentication"
 require "lenddo/errors/exceptions"
 require "spec_helper"
-require "curb"
 
 include Lenddo::Authentication
 
@@ -75,32 +74,5 @@ RSpec.describe Lenddo::Authentication do
         )
       }.to raise_error(Lenddo::Errors::UnknownException)
     end
-
-    it "should raise Lenddo::Errors::InternalErrorException on HTTP 500" do
-      expect {
-        Lenddo::Authentication.signed_request(
-          method: "GET",
-          host: "http://httpstat.us",
-          path: "/500",
-          params: {
-            partner_script_id: 'test'
-          }
-        )
-      }.to raise_error(Lenddo::Errors::InternalErrorException)
-    end
-
-    it "should raise Lenddo::Errors::UnknownException on > HTTP 500" do
-      expect {
-        Lenddo::Authentication.signed_request(
-          method: "GET",
-          host: "http://httpstat.us",
-          path: "/502",
-          params: {
-            partner_script_id: 'test'
-          }
-        )
-      }.to raise_error(Lenddo::Errors::UnknownException)
-    end
-
   end
  end

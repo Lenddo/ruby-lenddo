@@ -2,6 +2,8 @@ require "bundler/setup"
 require "dotenv"
 require "lenddo"
 require "rspec"
+require "json"
+require "curb"
 
 Dotenv.load
 

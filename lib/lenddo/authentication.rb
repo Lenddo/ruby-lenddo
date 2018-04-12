@@ -38,13 +38,6 @@ module Lenddo
         raise Lenddo::Errors::UnknownException.new(e.message)
       end
 
-      http_code = response.response_code
-      if http_code == 500
-        raise Lenddo::Errors::InternalErrorException
-      elsif http_code > 500
-        raise Lenddo::Errors::UnknownException.new(response.status)
-      end
-
       response
     end
 
