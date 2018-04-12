@@ -20,7 +20,7 @@ module Lenddo
 
       uri = URI.parse(host + path)
       begin
-        Curl.send(method.to_s, uri.to_s, params) do |http|
+        response = Curl.send(method.to_s, uri.to_s, params) do |http|
           headers = sign(method.upcase, path, body)
           headers.each do |key, value|
             http.headers[key] = value.chomp
@@ -37,6 +37,15 @@ module Lenddo
       rescue => e
         raise Lenddo::Errors::UnknownException.new(e.message)
       end
+
+      http_code = response.response_code
+      if http_code == 500
+        raise Lenddo::Errors::InternalErrorException
+      elsif http_code > 500
+        raise Lenddo::Errors::UnknownException.new(response.status)
+      end
+
+      response
     end
 
     private
