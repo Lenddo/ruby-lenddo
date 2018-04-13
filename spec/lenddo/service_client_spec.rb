@@ -51,7 +51,7 @@ RSpec.describe Lenddo::ServiceClient do
     end
   end
 
-  describe "application_decision" do
+  describe "#application_decision" do
     it "behave like" do
       expect(Lenddo::ServiceClient).to receive(:application_decision).with("application_id", "partnerscript_id")
       Lenddo::ServiceClient.application_decision("application_id", "partnerscript_id")
