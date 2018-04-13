@@ -1,4 +1,5 @@
 require "lenddo/authentication"
+require "lenddo/errors/exceptions"
 require "spec_helper"
 
 include Lenddo::Authentication
@@ -29,6 +30,49 @@ RSpec.describe Lenddo::Authentication do
       expect(response.status).to eq('200 OK')
       expect(response.response_code).to eq(200)
       expect(response.body).to be_a(String)
+    end
+  end
+
+  describe "custom exceptions" do
+    it "should raise Lenddo::Errors::HostResolutionError" do
+      expect {
+        Lenddo::Authentication.signed_request(
+          method: "GET",
+          host: "http://balhkdsad",
+          path: "/ClientScore/",
+          params: {
+            partner_script_id: 'test'
+          }
+        )
+      }.to raise_error(Lenddo::Errors::HostResolutionError)
+    end
+
+    it "should raise Lenddo::Errors::TimeoutException" do
+      allow(Curl).to receive(:send).and_raise(Curl::Err::TimeoutError)
+      expect {
+        Lenddo::Authentication.signed_request(
+          method: "GET",
+          host: "http://balhkdsad",
+          path: "/ClientScore/",
+          params: {
+            partner_script_id: 'test'
+          }
+        )
+      }.to raise_error(Lenddo::Errors::TimeoutException)
+    end
+
+    it "should raise Lenddo::Errors::UnknownException" do
+      allow(Curl).to receive(:send).and_raise(IOError)
+      expect {
+        Lenddo::Authentication.signed_request(
+          method: "GET",
+          host: "http://balhkdsad",
+          path: "/ClientScore/",
+          params: {
+            partner_script_id: 'test'
+          }
+        )
+      }.to raise_error(Lenddo::Errors::UnknownException)
     end
   end
  end
