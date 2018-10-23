@@ -1,11 +1,12 @@
 module Lenddo
   class NetworkService
-    def mobile_data(partnerscript_id)
+    def mobile_data(partner_id, partnerscript_id)
       signed_request(
         method: "GET",
         host: Lenddo.configuration.network_service,
         path: "/MobileData",
         params: {
+          partner_id: partner_id,
           partner_script_id: partnerscript_id
         }
       )
